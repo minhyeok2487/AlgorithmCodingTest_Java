@@ -1,4 +1,4 @@
-package section01.problem02;
+package section01Simulation.problem02;
 
 import java.util.*;
 class Solution {
