@@ -1,4 +1,4 @@
-package section01Simulation.problem04;
+package section01.problem04;
 
 import java.util.Arrays;
 
