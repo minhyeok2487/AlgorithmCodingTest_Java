@@ -1,4 +1,4 @@
-package section04.problem01;
+package section04_Sorting.problem01;
 
 import java.util.ArrayList;
 import java.util.Arrays;

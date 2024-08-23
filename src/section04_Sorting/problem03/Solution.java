@@ -1,4 +1,4 @@
-package section04.problem03;
+package section04_Sorting.problem03;
 import java.util.*;
 public class Solution {
     public int solution(int[] nums, int k){
