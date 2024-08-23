@@ -6,6 +6,7 @@ public class Solution {
     public int[] solution(String s){
         int[] answer = new int[5];
         HashMap<Character, Integer> sH = new HashMap<>();
+
         for(char x : s.toCharArray()){
             sH.put(x, sH.getOrDefault(x, 0)+1);
         }
