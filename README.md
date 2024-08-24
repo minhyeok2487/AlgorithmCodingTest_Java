@@ -21,6 +21,7 @@
 - 우선순위 큐를 이용한 문제
   - [문제 - 이중 우선순위 큐](https://github.com/minhyeok2487/AlgorithmCodingTest_Java/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/3/42628.%E2%80%85%EC%9D%B4%EC%A4%91%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%ED%81%90)
   - [문제 - 야근 지수](https://github.com/minhyeok2487/AlgorithmCodingTest_Java/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/3/12927.%E2%80%85%EC%95%BC%EA%B7%BC%E2%80%85%EC%A7%80%EC%88%98)
+  - [문제 - 더 맵게](https://github.com/minhyeok2487/AlgorithmCodingTest_Java/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2/42626.%E2%80%85%EB%8D%94%E2%80%85%EB%A7%B5%EA%B2%8C)
 - 트리, 그래프 구조 구현 및 탐색 문제
 - 연결 리스트 조작 문제
 
