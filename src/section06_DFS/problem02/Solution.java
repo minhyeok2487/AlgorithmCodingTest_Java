@@ -10,7 +10,6 @@ class Solution {
     Stack<Integer> pm;
 
     public void DFS(int L) {
-
         if (L == 7) {
             answer++;
         } else {

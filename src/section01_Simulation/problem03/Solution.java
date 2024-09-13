@@ -1,4 +1,4 @@
-package section01.problem03;
+package section01_Simulation.problem03;
 
 public class Solution {
     public int solution(int[][] board){
