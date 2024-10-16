@@ -10,7 +10,8 @@ class Solution {
     boolean flag;
 
     public void DFS(int L, int number) {
-        if (flag) return;
+        if (flag)
+            return;
         if (L == stop) {
             if (number > target) {
                 answer = number;
@@ -47,7 +48,8 @@ class Solution {
         stop = nums.size();
         ch = new int[stop];
         DFS(0, 0);
-        if (!flag) return -1;
+        if (!flag)
+            return -1;
         return answer;
     }
 
