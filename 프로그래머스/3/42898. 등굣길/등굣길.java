@@ -1,30 +1,31 @@
-import java.util.*;
-
 class Solution {
     public int solution(int m, int n, int[][] puddles) {
-        int[][] dp = new int[n +1][m +1];
+        int[][] street = new int[n][m];
         
-        //시작점 초기화
-        dp[1][1] = 1;
-        
-        // puddles 위치를 -1로 설정하여 체크
+        // 웅덩이는 -1
         for (int[] puddle : puddles) {
-            dp[puddle[1]][puddle[0]] = -1;
+            street[puddle[1]-1][puddle[0]-1] = -1;
         }
         
-        // DP 배열을 채우며 각 지점까지의 경로의 수 계산
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                if (dp[i][j] == -1) { //웅덩이인 경우 0
-                    dp[i][j] = 0;
-                } else {
-                    if (i > 1) dp[i][j] += dp[i-1][j];
-                    if (j > 1) dp[i][j] += dp[i][j-1];
-                    dp[i][j] %= 1000000007;
+        street[0][0] = 1;
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if(street[i][j] == -1) { // 웅덩이면 0으로 바꾸고 continue
+                  street[i][j] = 0;
+                  continue;
+                }
+                
+                if(i != 0) {
+                    street[i][j] += street[i - 1][j] % 1000000007; 
+                }
+
+                if(j != 0) {
+                    street[i][j] += street[i][j - 1] % 1000000007;   
                 }
             }
         }
         
-        return dp[n][m];
+        return street[n - 1][m - 1] % 1000000007;
     }
 }
