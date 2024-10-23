@@ -2,30 +2,29 @@ import java.util.*;
 
 class Solution {
     public long solution(int n, int[] works) {
-        // Max Heap 생성
+        // 최대 힙 우선순위 큐
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-
-        // 작업량을 Max Heap에 추가
+        
+        // 모든 작업을 최대 힙에 추가
         for (int work : works) {
-            maxHeap.add(work);
+            maxHeap.offer(work);
         }
-
-        // n번 동안 가장 큰 작업량을 1씩 줄임
-        for (int i = 0; i < n; i++) {
-            if (!maxHeap.isEmpty()) {
-                int maxWork = maxHeap.poll();
-                if (maxWork > 0) {
-                    maxWork -= 1;
-                    maxHeap.add(maxWork);
-                }
+        
+        
+        // n시간 동안 가장 큰 작업량을 1씩 감소
+        while ( n > 0 && !maxHeap.isEmpty()) {
+            int max = maxHeap.poll();
+            if (max > 0) {
+                maxHeap.offer(max - 1);
             }
+            n--;
         }
-
-        // 남아 있는 작업량의 제곱합 계산
+        
+        // 남은 작업량의 제곱의 합 계산
         long answer = 0;
-        while (!maxHeap.isEmpty()) {
-            int remainingWork = maxHeap.poll();
-            answer += (long) remainingWork * remainingWork;
+        while(!maxHeap.isEmpty()) {
+            int work = maxHeap.poll();
+            answer += work * work;
         }
         
         return answer;
