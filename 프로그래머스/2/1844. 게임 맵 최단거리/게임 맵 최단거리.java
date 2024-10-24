@@ -1,48 +1,49 @@
 import java.util.*;
 
 class Solution {
-    // 방향 벡터 (상, 하, 좌, 우)
-    private static final int[] dx = {-1, 1, 0, 0};
-    private static final int[] dy = {0, 0, -1, 1};
+    int[] dx = {1, 0, -1, 0}; // 행 이동
+    int[] dy = {0, 1, 0, -1}; // 열 이동
+    
+    class Point {
+        int x, y, distance;
+        Point(int x, int y, int distance) {
+            this.x = x;
+            this.y = y;
+            this.distance = distance;
+        }
+    }
     
     public int solution(int[][] maps) {
         int n = maps.length;
         int m = maps[0].length;
-        
-        // 방문 여부를 체크하기 위한 배열
         boolean[][] visited = new boolean[n][m];
         
-        // BFS를 위한 큐 초기화
-        Deque<int[]> deque = new ArrayDeque<>();
-        deque.add(new int[]{0, 0, 1}); // 시작점 (0, 0)과 초기 거리 1
+        Deque<Point> deq = new ArrayDeque<>();
+        deq.offerLast(new Point(0, 0, 1));
+        visited[0][0] = true;
         
-        // BFS 실행
-        while (!deque.isEmpty()) {
-            int[] current = deque.poll();
-            int x = current[0];
-            int y = current[1];
-            int distance = current[2];
+        while (!deq.isEmpty()) {
+            Point current = deq.pollFirst();
             
-            // 목표 지점에 도달한 경우
-            if (x == n - 1 && y == m - 1) {
-                return distance;
+            // 도착지점에 도달한 경우
+            if (current.x == n-1 && current.y == m-1) {
+                return current.distance;
             }
             
-            // 4가지 방향으로 탐색
+            // 4방향 탐색
             for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                int nx = current.x + dx[i];
+                int ny = current.y + dy[i];
                 
-                // 맵 범위 내에 있고, 방문하지 않았으며, 이동할 수 있는 곳이라면
-                if (nx >= 0 && ny >= 0 && nx < n && ny < m
+                // 맵 범위 내이고, 벽이 아니고, 방문하지 않은 경우
+                if (nx >= 0 && nx < n && ny >= 0 && ny < m
                    && maps[nx][ny] == 1 && !visited[nx][ny]) {
-                    visited[nx][ny] = true; // 방문 처리
-                    deque.add(new int[]{nx, ny, distance + 1}); // 큐에 추가
+                    visited[nx][ny] = true;
+                    deq.offerLast(new Point(nx, ny, current.distance + 1));
                 }
             }
         }
-
-        // 목표 지점에 도달할 수 없는 경우
+        
         return -1;
     }
 }
