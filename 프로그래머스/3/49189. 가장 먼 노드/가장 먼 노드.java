@@ -1,53 +1,58 @@
 import java.util.*;
 
 class Solution {
-    
     ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
     
     public int solution(int n, int[][] edge) {
+        // 그래프 초기화
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
         
-        for (int[] i : edge) {
-            int v = i[0];
-            int w = i[1];
-            graph.get(v).add(w);
-            graph.get(w).add(v);
+        // 양방향 간선 추가
+        for (int[] e : edge) {
+            graph.get(e[0]).add(e[1]);
+            graph.get(e[1]).add(e[0]);
         }
         
-        boolean[] visit = new boolean[n+1];
-        
-        return bfs(graph, n, visit);
+        return bfs(n);
     }
     
-    public static int bfs(ArrayList<ArrayList<Integer>> graph, int n, boolean[] visit) {
-        Queue<int[]> q = new LinkedList<>();
-        int answer = 0;
+    private int bfs(int n) {
+        Queue<Integer> queue = new LinkedList<>();
+        int[] distance = new int[n + 1];
+        Arrays.fill(distance, -1);  // 방문하지 않은 노드는 -1로 초기화
         
-        q.add(new int[] {1, 0});
-        visit[1] = true;
-        int maxDepth = 0;
+        // 시작점 설정
+        queue.offer(1);
+        distance[1] = 0;
         
-        while(!q.isEmpty()) {
-            int[] arr = q.poll();
-			int v = arr[0];
-			int depth = arr[1];
-			
-			if(maxDepth == depth) answer++;
-			else if (maxDepth < depth) { 
-				maxDepth = depth;
-				answer = 1;
-			}
-			
-			for (int i = 0; i < graph.get(v).size(); i++) {
-				int w = graph.get(v).get(i); //인접 정점
-				if (!visit[w]) {
-					q.add(new int[] { w, depth + 1 });
-					visit[w] = true;
-				}
-			}
+        // BFS 탐색
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            
+            for (int next : graph.get(current)) {
+                if (distance[next] == -1) {
+                    distance[next] = distance[current] + 1;
+                    queue.offer(next);
+                }
+            }
         }
-        return answer;
+        
+        // 최대 거리 찾기
+        int maxDistance = 0;
+        for (int i = 1; i <= n; i++) {
+            maxDistance = Math.max(maxDistance, distance[i]);
+        }
+        
+        // 최대 거리에 있는 노드 개수 세기
+        int count = 0;
+        for (int i = 1; i <= n; i++) {
+            if (distance[i] == maxDistance) {
+                count++;
+            }
+        }
+        
+        return count;
     }
 }
